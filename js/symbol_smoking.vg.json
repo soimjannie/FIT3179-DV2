@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Smoking is not shared evenly",
+    "subtitle": "Daily smoking rate (%) of adults, 2022 \u2014 circle size = rate"
+  },
+  "width": 440,
+  "height": 470,
+  "projection": {
+    "type": "conicEqualArea"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "js/ausStates.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ausStates"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eef1f4",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_centroids.csv"
+      },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "daily_smoking",
+              "state"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "color": "#e76f51",
+        "opacity": 0.8,
+        "stroke": "#a3341c",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "daily_smoking",
+          "type": "quantitative",
+          "title": "Daily smoking rate (%)",
+          "scale": {
+            "range": [
+              60,
+              1500
+            ],
+            "domain": [
+              5,
+              15
+            ]
+          },
+          "legend": {
+            "orient": "top-left",
+            "symbolFillColor": "#e76f51",
+            "symbolStrokeColor": "#a3341c"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "daily_smoking",
+            "type": "quantitative",
+            "title": "Daily smoking %"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Poorer diets, heavier states",
+    "subtitle": "Each point is a state/territory: inadequate fruit vs overweight/obese, 2022"
+  },
+  "width": 460,
+  "height": 340,
+  "data": {
+    "url": "data/state_risk_factors_2022.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "inadequate_fruit",
+      "type": "quantitative",
+      "title": "Adults not eating enough fruit (%)",
+      "scale": {
+        "domain": [
+          53,
+          61
+        ],
+        "zero": false
+      }
+    },
+    "y": {
+      "field": "overweight_obese",
+      "type": "quantitative",
+      "title": "Adults overweight or obese (%)",
+      "scale": {
+        "domain": [
+          61,
+          72
+        ],
+        "zero": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#9aa5b1",
+        "strokeWidth": 1.5,
+        "opacity": 0.7
+      },
+      "encoding": {
+        "order": {
+          "field": "inadequate_fruit"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 140,
+        "color": "#e76f51",
+        "opacity": 0.9
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "inadequate_fruit",
+            "title": "Inadequate fruit %"
+          },
+          {
+            "field": "overweight_obese",
+            "title": "Overweight/obese %"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#3e4c59"
+      },
+      "encoding": {
+        "text": {
+          "field": "code"
+        }
+      }
+    }
+  ]
+}

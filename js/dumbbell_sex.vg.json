@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Men take more lifestyle risks than women",
+    "subtitle": "% of adults with each risk factor by sex, 2022"
+  },
+  "width": 440,
+  "height": 260,
+  "encoding": {
+    "y": {
+      "field": "factor",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Overweight or obese",
+        "Exceeded alcohol guideline",
+        "Daily smoking"
+      ],
+      "axis": {
+        "labelLimit": 200
+      }
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/national_by_sex_2022.csv"
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#cbd2d9",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Male",
+          "type": "quantitative",
+          "title": "% of adults",
+          "scale": {
+            "domain": [
+              0,
+              80
+            ]
+          }
+        },
+        "x2": {
+          "field": "Female"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/national_by_sex_long.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "size": 170,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "title": "Sex",
+          "scale": {
+            "domain": [
+              "Male",
+              "Female"
+            ],
+            "range": [
+              "#3d5a80",
+              "#ee6c4d"
+            ]
+          },
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "factor",
+            "title": "Risk factor"
+          },
+          {
+            "field": "sex",
+            "title": "Sex"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "%"
+          }
+        ]
+      }
+    }
+  ]
+}

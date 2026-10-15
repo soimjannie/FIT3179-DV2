@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "A lifestyle report card for every state",
+    "subtitle": "% of adults with each risk factor, 2022 (darker = higher)"
+  },
+  "width": 420,
+  "height": 320,
+  "data": {
+    "url": "data/state_risk_factors_long.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "factor",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Daily smoking",
+        "Exceeded alcohol guideline",
+        "Overweight or obese",
+        "Inadequate fruit",
+        "Inadequate vegetables"
+      ],
+      "axis": {
+        "labelAngle": -25,
+        "labelLimit": 120,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "New South Wales",
+        "Victoria",
+        "Queensland",
+        "South Australia",
+        "Western Australia",
+        "Tasmania",
+        "Northern Territory",
+        "Australian Capital Territory"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "% of adults",
+          "scale": {
+            "scheme": "yelloworangered"
+          },
+          "legend": {
+            "orient": "right",
+            "gradientLength": 180
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "factor",
+            "title": "Risk factor"
+          },
+          {
+            "field": "value",
+            "title": "% of adults"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10
+      },
+      "encoding": {
+        "text": {
+          "field": "value",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.value > 70",
+            "value": "white"
+          },
+          "value": "#333333"
+        }
+      }
+    }
+  ]
+}

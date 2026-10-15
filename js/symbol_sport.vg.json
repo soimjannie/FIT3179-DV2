@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Where Australians are most active",
+    "subtitle": "Circle size = adults who did any activity; colour = % active 3+ times a week (AusPlay 2025)"
+  },
+  "width": 600,
+  "height": 410,
+  "projection": {
+    "type": "conicEqualArea"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "js/ausStates.topojson",
+        "format": { "type": "topojson", "feature": "ausStates" }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eef1f4",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": { "url": "data/state_centroids.csv" },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": { "url": "data/ausplay_state_participation.csv" },
+            "key": "code",
+            "fields": ["participants", "active_3plus", "active_1plus", "state"]
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.85,
+        "stroke": "#000000",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude":  { "field": "lat", "type": "quantitative" },
+        "size": {
+          "field": "participants",
+          "type": "quantitative",
+          "title": "Adults active (count)",
+          "scale": { "range": [40, 2000] },
+          "legend": { "orient": "top-left", "format": ".2s" }
+        },
+        "color": {
+          "field": "active_3plus",
+          "type": "quantitative",
+          "title": "% active 3+/week",
+          "scale": { "scheme": "greens", "domain": [46, 60] },
+          "legend": { "orient": "bottom-left" }
+        },
+        "tooltip": [
+          { "field": "state", "title": "State / territory" },
+          { "field": "participants", "type": "quantitative", "title": "Adults active", "format": "," },
+          { "field": "active_1plus", "type": "quantitative", "title": "Active 1+/yr %" },
+          { "field": "active_3plus", "type": "quantitative", "title": "Active 3+/week %" }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "legend": {
+      "symbolFillColor": "white",
+      "symbolStrokeColor": "#0b3d4a",
+      "symbolStrokeWidth": 1.5,
+      "symbolSize": 200
+    }
+  }
+}

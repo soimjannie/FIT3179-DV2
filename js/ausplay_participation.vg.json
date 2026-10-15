@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Active — but how often?",
+    "subtitle": "AusPlay 2025 · % of adults by frequency of activity"
+  },
+  "width": 440,
+  "height": 400,
+  "data": { "url": "data/ausplay_participation.csv" },
+  "transform": [
+    { "calculate": "-datum.pct",     "as": "sortKey" },
+    { "calculate": "-datum.pct / 2", "as": "x0" },
+    { "calculate": " datum.pct / 2", "as": "x1" },
+    {
+      "window": [{ "op": "lag", "field": "pct", "as": "prevPct" }],
+      "sort": [{ "field": "sortKey" }]
+    },
+    {
+      "calculate": "datum.prevPct == null ? '' : '−' + format(datum.prevPct - datum.pct, '.0f') + ' pp'",
+      "as": "dropoff"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "measure",
+      "type": "nominal",
+      "sort": { "field": "sortKey" },
+      "title": null,
+      "axis": { "labelFontWeight": "bold", "labelFontSize": 12, "labelLimit": 260 }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "size": 46, "cornerRadius": 6, "opacity": 1 },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "axis": null,
+          "scale": { "domain": [-50, 65] }
+        },
+        "x2": { "field": "x1" },
+        "color": {
+          "field": "pct",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "range": ["#a6d4cc", "#2a9d8f", "#4aa89b", "#1c6b61"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "measure", "title": "Frequency" },
+          { "field": "pct", "title": "% of adults", "format": ".0f" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "text", "fontSize": 16, "fontWeight": "bold", "color": "white" },
+      "encoding": {
+        "x": { "datum": 0 },
+        "text": { "field": "pct", "type": "quantitative", "format": ".0f" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#1d6f65"
+      },
+      "encoding": {
+        "x": { "field": "x1", "type": "quantitative" },
+        "text": { "field": "dropoff" }
+      }
+    }
+  ]
+}

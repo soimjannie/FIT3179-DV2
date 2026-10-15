@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Smoking has more than halved in 20 years",
+    "subtitle": "Daily smoking rate (%) of Australian adults, 2001-2022"
+  },
+  "width": 520,
+  "height": 280,
+  "data": {
+    "url": "data/smoking_trend.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "format": "d",
+        "values": [
+          2001,
+          2005,
+          2008,
+          2012,
+          2015,
+          2018,
+          2022
+        ]
+      },
+      "scale": {
+        "domain": [
+          2000,
+          2023
+        ]
+      }
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "title": "Daily smokers (%)",
+      "scale": {
+        "domain": [
+          0,
+          25
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.12,
+        "color": "#e76f51",
+        "line": false
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#e76f51",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 60,
+          "color": "#e76f51"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2001 || datum.year == 2022"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -14,
+        "fontWeight": "bold",
+        "fontSize": 13,
+        "color": "#7a1f1f"
+      },
+      "encoding": {
+        "text": {
+          "field": "rate",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

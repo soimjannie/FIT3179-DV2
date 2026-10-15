@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Only 1 in 4 adults move enough",
+    "subtitle": [
+      "Each square = 1% of Australian adults aged 15+.",
+      "23.9% met the physical activity guidelines in 2022."
+    ],
+    "color": "#ffffff",
+    "subtitleColor": "#cfd8dc"
+  },
+  "width": 340,
+  "height": 340,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "data": {
+    "sequence": { "start": 0, "stop": 100, "as": "i" }
+  },
+  "transform": [
+    { "calculate": "floor(datum.i / 10)", "as": "row" },
+    { "calculate": "datum.i % 10",        "as": "col" },
+    {
+      "calculate": "datum.i < 24 ? 'Meets the guidelines' : 'Does not meet'",
+      "as": "status"
+    }
+  ],
+  "mark": {
+    "type": "square",
+    "size": 620,
+    "stroke": "#0f2b34",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": { "field": "col", "type": "ordinal", "axis": null },
+    "y": { "field": "row", "type": "ordinal", "axis": null, "sort": "descending" },
+    "color": {
+      "field": "status",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Meets the guidelines", "Does not meet"],
+        "range":  ["#4dbfae", "#2b4d57"]
+      },
+      "legend": {
+        "title": null,
+        "orient": "bottom",
+        "labelColor": "#cfd8dc",
+        "symbolStrokeWidth": 0
+      }
+    },
+    "tooltip": [{ "field": "status", "title": "Status" }]
+  },
+  "config": {
+    "view": { "stroke": null },
+    "background": "transparent"
+  }
+}

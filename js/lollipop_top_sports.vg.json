@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australia's favourite ways to move",
+    "subtitle": "Adult participation rate (%), AusPlay 2025"
+  },
+  "width": 460,
+  "height": 360,
+  "data": {
+    "url": "data/ausplay_top_sports.csv"
+  },
+  "encoding": {
+    "y": {
+      "field": "activity",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {
+        "labelLimit": 160
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#cbd2d9",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative",
+          "title": "% of adults who took part",
+          "scale": {
+            "domain": [
+              0,
+              55
+            ]
+          }
+        },
+        "x2": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 200,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "rate",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "tealblues"
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "rate",
+            "title": "% of adults"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 11,
+        "fontWeight": "bold",
+        "fontSize": 11
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rate",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}
