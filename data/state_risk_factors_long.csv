@@ -1,0 +1,41 @@
+state,code,factor,value
+New South Wales,NSW,Daily smoking,10.0
+New South Wales,NSW,Inadequate fruit,54.2
+New South Wales,NSW,Inadequate vegetables,93.2
+New South Wales,NSW,Exceeded alcohol guideline,25.2
+New South Wales,NSW,Overweight or obese,63.1
+Victoria,VIC,Daily smoking,9.3
+Victoria,VIC,Inadequate fruit,55.3
+Victoria,VIC,Inadequate vegetables,93.6
+Victoria,VIC,Exceeded alcohol guideline,24.3
+Victoria,VIC,Overweight or obese,65.3
+Queensland,QLD,Daily smoking,14.0
+Queensland,QLD,Inadequate fruit,57.1
+Queensland,QLD,Inadequate vegetables,94.9
+Queensland,QLD,Exceeded alcohol guideline,29.4
+Queensland,QLD,Overweight or obese,68.8
+South Australia,SA,Daily smoking,9.7
+South Australia,SA,Inadequate fruit,58.3
+South Australia,SA,Inadequate vegetables,92.2
+South Australia,SA,Exceeded alcohol guideline,29.3
+South Australia,SA,Overweight or obese,68.0
+Western Australia,WA,Daily smoking,10.5
+Western Australia,WA,Inadequate fruit,56.2
+Western Australia,WA,Inadequate vegetables,92.3
+Western Australia,WA,Exceeded alcohol guideline,29.9
+Western Australia,WA,Overweight or obese,68.0
+Tasmania,TAS,Daily smoking,12.4
+Tasmania,TAS,Inadequate fruit,58.7
+Tasmania,TAS,Inadequate vegetables,89.1
+Tasmania,TAS,Exceeded alcohol guideline,28.9
+Tasmania,TAS,Overweight or obese,70.5
+Northern Territory,NT,Daily smoking,13.5
+Northern Territory,NT,Inadequate fruit,59.9
+Northern Territory,NT,Inadequate vegetables,93.9
+Northern Territory,NT,Exceeded alcohol guideline,31.1
+Northern Territory,NT,Overweight or obese,63.8
+Australian Capital Territory,ACT,Daily smoking,5.9
+Australian Capital Territory,ACT,Inadequate fruit,58.6
+Australian Capital Territory,ACT,Inadequate vegetables,92.3
+Australian Capital Territory,ACT,Exceeded alcohol guideline,27.4
+Australian Capital Territory,ACT,Overweight or obese,64.0
