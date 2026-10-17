@@ -4,8 +4,8 @@
     "text": "Australia's favourite ways to move",
     "subtitle": "Adult participation rate (%), AusPlay 2025"
   },
-  "width": 460,
-  "height": 360,
+  "width": 580,
+  "height": 480,
   "data": {
     "url": "data/ausplay_top_sports.csv"
   },
@@ -48,20 +48,13 @@
       "mark": {
         "type": "circle",
         "size": 200,
-        "opacity": 1
+        "opacity": 1,
+        "color": "#2a7b9b"
       },
       "encoding": {
         "x": {
           "field": "rate",
           "type": "quantitative"
-        },
-        "color": {
-          "field": "rate",
-          "type": "quantitative",
-          "scale": {
-            "scheme": "tealblues"
-          },
-          "legend": null
         },
         "tooltip": [
           {

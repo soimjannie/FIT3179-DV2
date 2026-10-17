@@ -4,8 +4,8 @@
     "text": "Men take more lifestyle risks than women",
     "subtitle": "% of adults with each risk factor by sex, 2022"
   },
-  "width": 440,
-  "height": 260,
+  "width": 560,
+  "height": 365,
   "encoding": {
     "y": {
       "field": "factor",

@@ -2,10 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Poorer diets, heavier states",
-    "subtitle": "Each point is a state/territory: inadequate fruit vs overweight/obese, 2022"
+    "subtitle": "Each point is a state/territory \u2014 inadequate fruit vs overweight/obese, 2022"
   },
-  "width": 460,
-  "height": 340,
+  "width": 640,
+  "height": 440,
   "data": {
     "url": "data/state_risk_factors_2022.csv"
   },
@@ -37,23 +37,28 @@
   },
   "layer": [
     {
+      "transform": [
+        {
+          "regression": "overweight_obese",
+          "on": "inadequate_fruit"
+        }
+      ],
       "mark": {
         "type": "line",
         "color": "#9aa5b1",
         "strokeWidth": 1.5,
-        "opacity": 0.7
-      },
-      "encoding": {
-        "order": {
-          "field": "inadequate_fruit"
-        }
+        "strokeDash": [
+          5,
+          4
+        ],
+        "opacity": 0.9
       }
     },
     {
       "mark": {
         "type": "point",
         "filled": true,
-        "size": 140,
+        "size": 150,
         "color": "#e76f51",
         "opacity": 0.9
       },
@@ -77,7 +82,7 @@
     {
       "mark": {
         "type": "text",
-        "dy": -12,
+        "dy": -13,
         "fontSize": 10,
         "fontWeight": "bold",
         "color": "#3e4c59"

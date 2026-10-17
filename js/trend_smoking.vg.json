@@ -4,8 +4,8 @@
     "text": "Smoking has more than halved in 20 years",
     "subtitle": "Daily smoking rate (%) of Australian adults, 2001-2022"
   },
-  "width": 520,
-  "height": 280,
+  "width": 620,
+  "height": 505,
   "data": {
     "url": "data/smoking_trend.csv"
   },
@@ -50,19 +50,19 @@
       "mark": {
         "type": "area",
         "opacity": 0.12,
-        "color": "#e76f51",
+        "color": "#e75190",
         "line": false
       }
     },
     {
       "mark": {
         "type": "line",
-        "color": "#e76f51",
+        "color": "#e75190",
         "strokeWidth": 3,
         "point": {
           "filled": true,
           "size": 60,
-          "color": "#e76f51"
+          "color": "#e75190"
         }
       }
     },
@@ -77,7 +77,7 @@
         "dy": -14,
         "fontWeight": "bold",
         "fontSize": 13,
-        "color": "#7a1f1f"
+        "color": "#a31c62"
       },
       "encoding": {
         "text": {

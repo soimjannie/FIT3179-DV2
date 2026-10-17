@@ -4,16 +4,28 @@
     "text": "Where Australians are most active",
     "subtitle": "Circle size = adults who did any activity; colour = % active 3+ times a week (AusPlay 2025)"
   },
-  "width": 600,
-  "height": 410,
+  "width": 660,
+  "height": 540,
   "projection": {
-    "type": "conicEqualArea"
+    "type": "conicEqualArea",
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
   },
   "layer": [
     {
       "data": {
         "url": "js/ausStates.topojson",
-        "format": { "type": "topojson", "feature": "ausStates" }
+        "format": {
+          "type": "topojson",
+          "feature": "ausStates"
+        }
       },
       "mark": {
         "type": "geoshape",
@@ -23,55 +35,131 @@
       }
     },
     {
-      "data": { "url": "data/state_centroids.csv" },
+      "data": {
+        "url": "data/state_centroids.csv"
+      },
       "transform": [
         {
           "lookup": "code",
           "from": {
-            "data": { "url": "data/ausplay_state_participation.csv" },
+            "data": {
+              "url": "data/ausplay_state_participation.csv"
+            },
             "key": "code",
-            "fields": ["participants", "active_3plus", "active_1plus", "state"]
+            "fields": [
+              "participants",
+              "active_3plus",
+              "active_1plus",
+              "state"
+            ]
           }
         }
       ],
       "mark": {
-        "type": "circle",
-        "opacity": 0.85,
-        "stroke": "#000000",
-        "strokeWidth": 1
+        "type": "point",
+        "shape": "circle",
+        "filled": true,
+        "opacity": 0.9,
+        "stroke": "#0b3d4a",
+        "strokeWidth": 0.8
       },
       "encoding": {
-        "longitude": { "field": "lon", "type": "quantitative" },
-        "latitude":  { "field": "lat", "type": "quantitative" },
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
         "size": {
           "field": "participants",
           "type": "quantitative",
           "title": "Adults active (count)",
-          "scale": { "range": [40, 2000] },
-          "legend": { "orient": "top-left", "format": ".2s" }
+          "scale": {
+            "range": [
+              60,
+              1600
+            ]
+          },
+          "legend": {
+            "orient": "left",
+            "offset": 14,
+            "direction": "vertical",
+            "format": ".2s",
+            "symbolFillColor": "#b8bcc4",
+            "symbolStrokeColor": "#5a6270",
+            "symbolStrokeWidth": 1,
+            "symbolType": "circle"
+          }
         },
         "color": {
           "field": "active_3plus",
           "type": "quantitative",
           "title": "% active 3+/week",
-          "scale": { "scheme": "greens", "domain": [46, 60] },
-          "legend": { "orient": "bottom-left" }
+          "scale": {
+            "scheme": "greens",
+            "domain": [
+              46,
+              60
+            ]
+          },
+          "legend": {
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 150,
+            "titleAnchor": "start",
+            "offset": 10
+          }
         },
         "tooltip": [
-          { "field": "state", "title": "State / territory" },
-          { "field": "participants", "type": "quantitative", "title": "Adults active", "format": "," },
-          { "field": "active_1plus", "type": "quantitative", "title": "Active 1+/yr %" },
-          { "field": "active_3plus", "type": "quantitative", "title": "Active 3+/week %" }
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "participants",
+            "type": "quantitative",
+            "title": "Adults active",
+            "format": ","
+          },
+          {
+            "field": "active_1plus",
+            "type": "quantitative",
+            "title": "Active 1+/yr %"
+          },
+          {
+            "field": "active_3plus",
+            "type": "quantitative",
+            "title": "Active 3+/week %"
+          }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "dy": -20
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
+      }
     }
-  ],
-  "config": {
-    "legend": {
-      "symbolFillColor": "white",
-      "symbolStrokeColor": "#0b3d4a",
-      "symbolStrokeWidth": 1.5,
-      "symbolSize": 200
-    }
-  }
+  ]
 }

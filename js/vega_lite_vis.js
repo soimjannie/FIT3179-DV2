@@ -3,7 +3,7 @@
    Embeds every Vega-Lite spec with one shared visual theme.
    ============================================================ */
 
-// Shared look-and-feel so all 11 charts read as one system.
+// Shared look-and-feel so all 14 charts read as one system.
 const vlTheme = {
   background: "transparent",
   font: "Inter, system-ui, sans-serif",
@@ -45,15 +45,14 @@ const vlTheme = {
 const charts = {
   waffle_activity:        "js/waffle_activity.vg.json",
   choropleth_overweight:  "js/choropleth_overweight.vg.json",
-  dotmap_alcohol:         "js/dotmap_alcohol.vg.json",
   symbol_smoking:         "js/symbol_smoking.vg.json",
-  hexmap_fruit:           "js/hexmap_fruit.vg.json",
+  dotmap_alcohol:         "js/dotmap_alcohol.vg.json",
+  cartogram_diet:         "js/cartogram_diet.vg.json",
   heatmap_riskfactors:    "js/heatmap_riskfactors.vg.json",
-  trend_smoking:          "js/trend_smoking.vg.json",
   dumbbell_sex:           "js/dumbbell_sex.vg.json",
   activity_ses:           "js/activity_ses.vg.json",
+  trend_smoking:          "js/trend_smoking.vg.json",
   connected_scatter:      "js/connected_scatter.vg.json",
-  small_multiples:        "js/small_multiples.vg.json",
   barchart_scorecard:     "js/barchart_scorecard.vg.json",
   symbol_sport:           "js/symbol_sport.vg.json",
   lollipop_top_sports:    "js/lollipop_top_sports.vg.json",
@@ -72,6 +71,8 @@ Object.entries(charts).forEach(([id, spec]) => {
   if (!el) return;
   vegaEmbed("#" + id, spec, embedOpt).catch(function (err) {
     console.error("Could not render " + id + ":", err);
-    el.innerHTML = '<p style="color:#9aa5b1;font-size:.9rem;padding:14px">'
+    el.innerHTML = '<p style="color:#9aa5b1;font-size:.9rem;padding:14px">' +
+      'Chart “' + id + '” could not load. Serve the folder over a local web ' +
+      'server so the data files can be fetched.</p>';
   });
 });

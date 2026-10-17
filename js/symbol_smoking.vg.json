@@ -2,12 +2,27 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Smoking is not shared evenly",
-    "subtitle": "Daily smoking rate (%) of adults, 2022 \u2014 circle size = rate"
+    "subtitle": "Daily smoking rate (%) of adults, 2022 \u2014 circle area = rate"
   },
-  "width": 440,
-  "height": 470,
+  "width": 660,
+  "height": 540,
+  "padding": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 5
+  },
   "projection": {
-    "type": "conicEqualArea"
+    "type": "conicEqualArea",
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
   },
   "layer": [
     {
@@ -46,9 +61,9 @@
       ],
       "mark": {
         "type": "circle",
-        "color": "#e76f51",
+        "color": "#e75190",
         "opacity": 0.8,
-        "stroke": "#a3341c",
+        "stroke": "#a31c62",
         "strokeWidth": 1
       },
       "encoding": {
@@ -67,7 +82,7 @@
           "scale": {
             "range": [
               60,
-              1500
+              1300
             ],
             "domain": [
               5,
@@ -75,9 +90,15 @@
             ]
           },
           "legend": {
-            "orient": "top-left",
-            "symbolFillColor": "#e76f51",
-            "symbolStrokeColor": "#a3341c"
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 5,
+            "title": "Daily smoking rate (%)",
+            "titleAnchor": "start",
+            "symbolFillColor": "#e75190",
+            "symbolStrokeColor": "#a31c62",
+            "symbolStrokeWidth": 1,
+            "offset": 8
           }
         },
         "tooltip": [
@@ -92,6 +113,31 @@
             "title": "Daily smoking %"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "dy": -22
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
       }
     }
   ]

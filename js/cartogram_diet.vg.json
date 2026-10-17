@@ -1,0 +1,151 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Fruit falls short almost everywhere",
+    "subtitle": "Cartogram \u2014 each state keeps its shape but is scaled by its fruit score: the bigger the shape, the more adults fall short (2022)"
+  },
+  "width": 660,
+  "height": 650,
+  "projection": {
+    "type": "conicEqualArea",
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "js/ausStates.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ausStates"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f6f4f0",
+        "stroke": "#dcd6cc",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "js/cartogram_diet.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2,
+        "fill": "#e07b39"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "properties.inadequate_fruit",
+            "type": "quantitative",
+            "title": "Inadequate fruit %"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "dy": -5,
+        "fill": "#3a2a18"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "inadequate_fruit"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "inadequate_fruit"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "dy": 7,
+        "fill": "#3a2a18"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "inadequate_fruit",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    }
+  ]
+}

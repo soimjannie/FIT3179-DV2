@@ -2,77 +2,177 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "The drinking map",
-    "subtitle": "Dot-density map — 1 dot ≈ 10,000 adults who exceed the alcohol guideline, 2022"
+    "subtitle": "Dot-density map \u2014 1 dot = 10,000 adults who exceed the alcohol guideline, 2022"
   },
-  "width": 340,
-  "height": 520,
+  "width": 660,
+  "height": 540,
   "projection": {
-    "type": "conicEqualArea"
+    "type": "conicEqualArea",
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
   },
   "layer": [
     {
       "data": {
         "url": "js/ausStates.topojson",
-        "format": { "type": "topojson", "feature": "ausStates" }
+        "format": {
+          "type": "topojson",
+          "feature": "ausStates"
+        }
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#f3f0f7",
-        "stroke": "white",
-        "strokeWidth": 1.2
-      }
-    },
-    {
-      "data": { "url": "data/alcohol_dots.csv" },
-      "mark": {
-        "type": "circle",
-        "color": "#6a3d9a",
-        "opacity": 0.6,
-        "stroke": "white",
-        "strokeWidth": 0.3
+        "fill": "#f4f1f7",
+        "stroke": "#cfc6da",
+        "strokeWidth": 1
       },
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "data/alcohol_by_state.csv"
+            },
+            "key": "state",
+            "fields": [
+              "state",
+              "code",
+              "exceeded_pct",
+              "adults_exceeding"
+            ]
+          }
+        }
+      ],
       "encoding": {
-        "longitude": { "field": "lon", "type": "quantitative" },
-        "latitude":  { "field": "lat", "type": "quantitative" },
-        "size": { "value": 30 },
         "tooltip": [
-          { "field": "state", "type": "nominal", "title": "State / territory" }
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "adults_exceeding",
+            "type": "quantitative",
+            "title": "Adults exceeding the guideline",
+            "format": ","
+          },
+          {
+            "field": "exceeded_pct",
+            "type": "quantitative",
+            "title": "Share of adults (%)"
+          }
         ]
       }
     },
     {
-      "data": { "values": [{ "dummy": 1 }] },
-      "layer": [
-        {
-          "mark": {
-            "type": "circle",
-            "size": 30,
-            "color": "#6a3d9a",
-            "opacity": 0.6,
-            "stroke": "white",
-            "strokeWidth": 0.3
-          },
-          "encoding": {
-            "longitude": { "datum": 153 },
-            "latitude":  { "datum": -41 }
-          }
+      "data": {
+        "url": "data/alcohol_dots.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#6a3d9a",
+        "opacity": 0.55,
+        "stroke": null
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
         },
-        {
-          "mark": {
-            "type": "text",
-            "align": "left",
-            "dx": 10,
-            "fontSize": 11,
-            "fontStyle": "italic",
-            "color": "#4a4a4a"
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "value": 18
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
           },
-          "encoding": {
-            "longitude": { "datum": 153 },
-            "latitude":  { "datum": -41 },
-            "text": { "value": "1 dot ≈ 10,000 adults" }
+          {
+            "field": "adults_exceeding",
+            "type": "quantitative",
+            "title": "Adults exceeding the guideline",
+            "format": ","
+          },
+          {
+            "field": "exceeded_pct",
+            "type": "quantitative",
+            "title": "Share of adults (%)"
+          }
+        ],
+        "color": {
+          "datum": "1 dot = 10,000 adults",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "1 dot = 10,000 adults"
+            ],
+            "range": [
+              "#6a3d9a"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": null,
+            "symbolType": "circle",
+            "symbolSize": 70,
+            "symbolOpacity": 0.75
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/alcohol_by_state.csv"
+            },
+            "key": "state",
+            "fields": [
+              "code",
+              "exceeded_pct",
+              "adults_exceeding"
+            ]
           }
         }
       ]
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "dy": -4
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
+      }
     }
   ]
 }

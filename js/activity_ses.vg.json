@@ -4,8 +4,8 @@
     "text": "Activity rises with wealth",
     "subtitle": "Adults meeting the activity + strength guidelines (%), by socioeconomic area, 2022"
   },
-  "width": 500,
-  "height": 280,
+  "width": 620,
+  "height": 380,
   "data": {
     "url": "data/activity_by_ses.csv"
   },
@@ -122,14 +122,6 @@
         "fontWeight": "bold",
         "fontSize": 12,
         "color": "#1f2d3d"
-      },
-      "encoding": {
-        "x": { "field": "met_pct", "type": "quantitative" },
-        "text": {
-          "field": "met_pct",
-          "type": "quantitative",
-          "format": ".1f"
-        }
       }
     }
   ]

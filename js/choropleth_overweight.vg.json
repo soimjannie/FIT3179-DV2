@@ -4,69 +4,174 @@
     "text": "Where weight weighs heaviest",
     "subtitle": "Adults who are overweight or obese (%), 2022"
   },
-  "width": 440,
-  "height": 400,
+  "width": 660,
+  "height": 540,
   "projection": {
-    "type": "conicEqualArea"
+    "type": "conicEqualArea",
+    "rotate": [
+      -134,
+      0,
+      0
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
   },
-  "data": {
-    "url": "js/ausStates.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "ausStates"
-    }
-  },
-  "transform": [
+  "layer": [
     {
-      "lookup": "properties.STATE_NAME",
-      "from": {
-        "data": {
-          "url": "data/state_risk_factors_2022.csv"
-        },
-        "key": "state",
-        "fields": [
-          "overweight_obese",
-          "daily_smoking",
-          "exceeded_alcohol",
-          "code"
-        ]
-      }
-    }
-  ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white",
-    "strokeWidth": 1.2
-  },
-  "encoding": {
-    "color": {
-      "field": "overweight_obese",
-      "type": "quantitative",
-      "title": "% overweight / obese",
-      "scale": {
-        "scheme": "yelloworangered",
-        "domain": [
-          62,
-          71
-        ]
+      "data": {
+        "url": "js/ausStates.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ausStates"
+        }
       },
-      "legend": {
-        "orient": "bottom",
-        "gradientLength": 200,
-        "format": ".0f"
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "state",
+            "fields": [
+              "overweight_obese",
+              "daily_smoking",
+              "exceeded_alcohol"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "color": {
+          "field": "overweight_obese",
+          "type": "quantitative",
+          "title": "% overweight / obese",
+          "scale": {
+            "scheme": "yelloworangered",
+            "domain": [
+              62,
+              71
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 170,
+            "format": ".0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "overweight_obese",
+            "type": "quantitative",
+            "title": "Overweight/obese %"
+          }
+        ]
       }
     },
-    "tooltip": [
-      {
-        "field": "properties.STATE_NAME",
-        "type": "nominal",
-        "title": "State / territory"
+    {
+      "data": {
+        "url": "data/state_labels.csv"
       },
-      {
-        "field": "overweight_obese",
-        "type": "quantitative",
-        "title": "Overweight/obese %"
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "dy": -6
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.overweight_obese > 67.5",
+            "value": "#ffffff"
+          },
+          "value": "#1f2933"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "overweight_obese"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "url": "data/state_labels.csv"
+      },
+      "transform": [
+        {
+          "lookup": "code",
+          "from": {
+            "data": {
+              "url": "data/state_risk_factors_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "overweight_obese"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "dy": 8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "overweight_obese",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.overweight_obese > 67.5",
+            "value": "#ffffff"
+          },
+          "value": "#1f2933"
+        }
       }
-    ]
-  }
+    }
+  ]
 }

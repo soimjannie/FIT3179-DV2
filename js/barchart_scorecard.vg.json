@@ -2,54 +2,29 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "How Australia scores on each lifestyle factor",
-    "subtitle": "% of all adults with the risk factor, 2022 · shaded bands mark risk severity"
+    "subtitle": "% of all adults with the risk factor, 2022"
   },
-  "width": 380,
-  "height": 450,
+  "width": 540,
+  "height": 470,
   "data": {
     "url": "data/national_scorecard_2022.csv"
   },
   "layer": [
     {
-      "data": {
-        "values": [
-          { "x0": 0,  "x1": 25,  "zone": "Low" },
-          { "x0": 25, "x1": 50,  "zone": "Moderate" },
-          { "x0": 50, "x1": 75,  "zone": "High" },
-          { "x0": 75, "x1": 100, "zone": "Very high" }
-        ]
-      },
-      "mark": { "type": "rect", "opacity": 0.35 },
-      "encoding": {
-        "x": {
-          "field": "x0",
-          "type": "quantitative",
-          "scale": { "domain": [0, 100] },
-          "title": null,
-          "axis": null
-        },
-        "x2": { "field": "x1" },
-        "color": {
-          "field": "zone",
-          "type": "nominal",
-          "scale": {
-            "domain": ["Low", "Moderate", "High", "Very high"],
-            "range": ["#e6f4f1", "#fdf6dd", "#fbe2d2", "#f6cfc4"]
-          },
-          "legend": null
-        }
-      }
-    },
-    {
       "mark": {
         "type": "rule",
         "stroke": "#1f2d3d",
-        "strokeDash": [4, 3],
+        "strokeDash": [
+          4,
+          3
+        ],
         "strokeWidth": 1.2,
         "opacity": 0.55
       },
       "encoding": {
-        "x": { "datum": 50 }
+        "x": {
+          "datum": 50
+        }
       }
     },
     {
@@ -57,7 +32,8 @@
         "type": "bar",
         "size": 24,
         "cornerRadius": 12,
-        "opacity": 1
+        "opacity": 1,
+        "color": "#e76f51"
       },
       "encoding": {
         "y": {
@@ -76,18 +52,27 @@
           "field": "value",
           "type": "quantitative",
           "title": "% of adults",
-          "scale": { "domain": [0, 100] },
-          "axis": { "titlePadding": 12, "tickCount": 6 }
-        },
-        "color": {
-          "field": "value",
-          "type": "quantitative",
-          "scale": { "scheme": "yelloworangered" },
-          "legend": null
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "titlePadding": 12,
+            "tickCount": 6
+          }
         },
         "tooltip": [
-          { "field": "factor", "title": "Risk factor" },
-          { "field": "value", "title": "% of adults", "format": ".1f" }
+          {
+            "field": "factor",
+            "title": "Risk factor"
+          },
+          {
+            "field": "value",
+            "title": "% of adults",
+            "format": ".1f"
+          }
         ]
       }
     },
@@ -95,7 +80,7 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "dx": 9,
+        "dx": 8,
         "fontWeight": "bold",
         "fontSize": 12,
         "color": "#1f2d3d"
@@ -106,8 +91,15 @@
           "type": "nominal",
           "sort": "-x"
         },
-        "x": { "field": "value", "type": "quantitative" },
-        "text": { "field": "value", "type": "quantitative", "format": ".1f" }
+        "x": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "value",
+          "type": "quantitative",
+          "format": ".1f"
+        }
       }
     }
   ]

@@ -5,26 +5,34 @@
     "subtitle": "% of adults with each risk factor, 2022 (darker = higher)"
   },
   "width": 420,
-  "height": 320,
+  "height": 440,
   "data": {
     "url": "data/state_risk_factors_long.csv"
   },
+  "transform": [
+    {
+      "calculate": "datum.factor === 'Exceeded alcohol guideline' ? 'Over alcohol guideline' : datum.factor === 'Overweight or obese' ? 'Overweight / obese' : datum.factor",
+      "as": "factor_label"
+    }
+  ],
   "encoding": {
     "x": {
-      "field": "factor",
+      "field": "factor_label",
       "type": "nominal",
       "title": null,
       "sort": [
         "Daily smoking",
-        "Exceeded alcohol guideline",
-        "Overweight or obese",
+        "Over alcohol guideline",
+        "Overweight / obese",
         "Inadequate fruit",
         "Inadequate vegetables"
       ],
       "axis": {
-        "labelAngle": -25,
-        "labelLimit": 120,
-        "orient": "top"
+        "labelAngle": -30,
+        "labelLimit": 220,
+        "labelFontSize": 10,
+        "orient": "top",
+        "labelPadding": 4
       }
     },
     "y": {
