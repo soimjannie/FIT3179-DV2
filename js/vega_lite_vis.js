@@ -7,16 +7,17 @@
 const vlTheme = {
   background: "transparent",
   font: "Inter, system-ui, sans-serif",
-  title: {
+    title: {
     font: "Archivo, Inter, sans-serif",
-    fontSize: 17,
+    fontSize: 22,
     fontWeight: 700,
     anchor: "start",
     color: "#1f2933",
     subtitleFont: "Inter, sans-serif",
     subtitleColor: "#697586",
-    subtitleFontSize: 12.5,
-    offset: 12
+    subtitleFontSize: 18,
+    subtitlePadding: 6,
+    offset: 14
   },
   axis: {
     labelFont: "Inter, sans-serif",

@@ -9,7 +9,7 @@
     "color": "#ffffff",
     "subtitleColor": "#cfd8dc"
   },
-  "width": 400,
+  "width": 440,
   "height": 340,
   "autosize": { "type": "fit", "contains": "padding" },
   "data": {

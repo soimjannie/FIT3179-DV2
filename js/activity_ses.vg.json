@@ -5,7 +5,7 @@
     "subtitle": "Adults meeting the activity + strength guidelines (%), by socioeconomic area, 2022"
   },
   "width": 620,
-  "height": 380,
+  "height": 400,
   "data": {
     "url": "data/activity_by_ses.csv"
   },

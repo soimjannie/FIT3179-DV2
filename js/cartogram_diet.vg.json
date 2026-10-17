@@ -2,10 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Fruit falls short almost everywhere",
-    "subtitle": "Cartogram \u2014 each state keeps its shape but is scaled by its fruit score: the bigger the shape, the more adults fall short (2022)"
+    "fontSize": 38,
+    "subtitlePadding": 10,
+    "offset": 10
   },
-  "width": 660,
-  "height": 650,
+  "width": 1200,
+  "height": 1050,
   "projection": {
     "type": "conicEqualArea",
     "rotate": [
@@ -29,13 +31,10 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#f6f4f0",
-        "stroke": "#dcd6cc",
-        "strokeWidth": 1,
-        "strokeDash": [
-          3,
-          2
-        ]
+        "fill": "#ece6dc",
+        "stroke": "#c6bba8",
+        "strokeWidth": 1.1,
+        "strokeDash": [3,2]
       }
     },
     {
@@ -73,9 +72,9 @@
       },
       "mark": {
         "type": "text",
-        "fontSize": 10,
+        "fontSize": 22,
         "fontWeight": "bold",
-        "dy": -5,
+        "dy": -20,
         "fill": "#3a2a18"
       },
       "encoding": {
@@ -127,7 +126,7 @@
       ],
       "mark": {
         "type": "text",
-        "fontSize": 9,
+        "fontSize": 21,
         "dy": 7,
         "fill": "#3a2a18"
       },

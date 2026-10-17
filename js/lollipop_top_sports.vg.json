@@ -5,7 +5,7 @@
     "subtitle": "Adult participation rate (%), AusPlay 2025"
   },
   "width": 580,
-  "height": 480,
+  "height": 460,
   "data": {
     "url": "data/ausplay_top_sports.csv"
   },
