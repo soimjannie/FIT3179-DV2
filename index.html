@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live Well, Australia — how lifestyle shapes our health, state by state</title>
 
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%230b3d4a%27%2F%3E%3Cpath%20d%3D%27M8%2038h10l5-14%207%2024%206-16%204%206h16%27%20fill%3D%27none%27%20stroke%3D%27%232a9d8f%27%20stroke-width%3D%275%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E" />
+
   <!-- Vega / Vega-Lite / Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
@@ -19,47 +21,60 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body>
+<body id="top">
 
   <!-- ============ HEADER ============ -->
-  <header class="hero">
-    <div class="wrap">
-      <p class="eyebrow">A data story about Australia · 2022–2025</p>
-      <h1>Live Well, Australia</h1>
-      <p class="dek">How lifestyle shapes our health — state by state. Smoking, diet, drinking,
-        activity and weight vary a surprising amount across the country. Do we live longer where we live better?</p>
+      <header class="hero">
+    <div class="wrap hero-grid">
 
-      <div class="stat-row">
-        <div class="stat">
-          <span class="stat-num">10.6%</span>
-          <span class="stat-label">of adults smoke daily</span>
+      <div class="hero-left">
+        <p class="eyebrow">A data story about Australia · 2022–2025</p>
+        <h1>Live Well, Australia</h1>
+        <p class="dek">How lifestyle shapes our health — state by state. Smoking, diet, drinking,
+          activity and weight vary a surprising amount across the country. Do we live longer where we live better?</p>
+
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-num">10.6%</span>
+            <span class="stat-label">of adults smoke daily</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">23.9%</span>
+            <span class="stat-label">meet the activity guidelines</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">1 in 4</span>
+            <span class="stat-label">exceed the alcohol guideline</span>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-num">23.9%</span>
-          <span class="stat-label">meet the activity guidelines</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">1 in 4</span>
-          <span class="stat-label">exceed the alcohol guideline</span>
+
+        <nav class="jump" aria-label="Jump to a section">
+          <a href="#part-geography">Geography</a>
+          <a href="#part-people">People</a>
+          <a href="#part-payoff">Payoff</a>
+          <a href="#part-play">Play</a>
+        </nav>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-waffle">
+          <div id="waffle_activity" class="vis"></div>
         </div>
       </div>
 
-      <div class="hero-waffle">
-        <div id="waffle_activity" class="vis"></div>
-      </div>
     </div>
   </header>
 
   <main class="wrap">
 
     <!-- ============ SECTION 1 : MAPS ============ -->
-    <section>
+    <section id="part-geography">
       <span class="section-kicker">Part 1</span>
       <h2>The geography of lifestyle</h2>
       <p class="lead">Lifestyle is not spread evenly across the map. The same behaviour can be twice as common
         in one state as in another. Four different map idioms — a filled <strong>choropleth</strong>, a
-        <strong>proportional-symbol map</strong>, a <strong>dot-density map</strong> and a hand-built
-        <strong>tile grid</strong> — show where Australians are heaviest, where they smoke most, where they drink
+        <strong>proportional-symbol map</strong>, a <strong>dot-density map</strong> and a
+        <strong>cartogram</strong> — show where Australians are heaviest, where they smoke most, where they drink
         most, and where diets fall short.</p>
 
       <div class="grid grid-2">
@@ -78,31 +93,38 @@
       <div class="grid grid-2">
         <figure class="card">
           <div id="dotmap_alcohol" class="vis"></div>
-          <figcaption>A <strong>dot-density map</strong> — each dot is about 10,000 adults who exceed the alcohol
+          <figcaption>A <strong>dot-density map</strong> — each dot is 10,000 adults who exceed the alcohol
             guideline, scattered within their state. It shows the sheer <em>number</em> of heavy drinkers, which
             clusters in the populous south-east, rather than the rate.</figcaption>
         </figure>
         <figure class="card">
-          <div id="hexmap_fruit" class="vis"></div>
-          <figcaption>A <strong>tile-grid (hex) map</strong> — a custom-built element. Each state is an equal
-            tile, so tiny Tasmania and the ACT read as clearly as vast WA. Half of adults everywhere fall short on fruit.</figcaption>
+          <div id="cartogram_diet" class="vis"></div>
+          <figcaption>Each state keeps its
+            real shape but is shrunk towards its centre by its fruit score, so the biggest shapes mark the worst
+            diets. The Northern Territory fares worst, New South Wales best.</figcaption>
         </figure>
       </div>
     </section>
 
     <!-- ============ SECTION 2 : WHO ============ -->
-    <section>
+    <section id="part-people">
       <span class="section-kicker">Part 2</span>
       <h2>Who lives well?</h2>
       <p class="lead">Zooming in on people rather than places. A report-card heatmap compares every state on
         every factor at once; a dumbbell lays bare the gap between men and women; a socioeconomic gradient shows
         activity rising with wealth; and the trend line charts smoking's long decline.</p>
 
-      <figure class="card card-wide">
-        <div id="heatmap_riskfactors" class="vis"></div>
-        <figcaption>Reading across a row compares a single state on every factor; reading down a column ranks the
-          states. Vegetable intake is the deepest, most uniform problem in the country.</figcaption>
-      </figure>
+      <div class="grid grid-2">
+        <figure class="card">
+          <div id="heatmap_riskfactors" class="vis"></div>
+          <figcaption>Reading across a row compares a single state on every factor; reading down a column ranks the
+            states. Vegetable intake is the deepest, most uniform problem in the country.</figcaption>
+        </figure>
+        <figure class="card">
+          <div id="trend_smoking" class="vis"></div>
+          <figcaption>Daily smoking has more than halved since 2001 — one of Australia's clearest public-health wins.</figcaption>
+        </figure>
+      </div>
 
       <div class="grid grid-2">
         <figure class="card">
@@ -112,90 +134,91 @@
         <figure class="card">
           <div id="activity_ses" class="vis"></div>
           <figcaption>Activity tracks wealth: adults in the most advantaged areas are two-thirds more likely to
-            meet the guidelines than those in the least advantaged.</figcaption>
+            meet the guidelines than those in the least advantaged (AIHW, 2022).</figcaption>
         </figure>
       </div>
 
-      <figure class="card card-wide">
-        <div id="trend_smoking" class="vis"></div>
-        <figcaption>Daily smoking has more than halved since 2001 — one of Australia's clearest public-health wins.</figcaption>
-      </figure>
     </section>
 
     <!-- ============ SECTION 3 : PAYOFF ============ -->
-    <section>
+    <section id="part-payoff">
       <span class="section-kicker">Part 3</span>
       <h2>Lifestyle &amp; wellbeing — the payoff</h2>
-      <p class="lead">Do lifestyle choices and health outcomes move together? The connected scatter traces the link
-        between diet and weight across states; the small multiples give the whole picture factor by factor; and the
-        scorecard ranks the nation's biggest lifestyle gaps.</p>
+      <p class="lead">Do lifestyle choices and health outcomes move together? A scatterplot traces the link between diet and
+        weight across the states, and a radial plot ranks the nation's biggest lifestyle gaps side by side.</p>
 
       <div class="grid grid-2">
         <figure class="card">
           <div id="connected_scatter" class="vis"></div>
-          <figcaption>States where more adults fall short on fruit also tend to have higher overweight/obesity —
-            the grey path connects states from the best diet to the worst.</figcaption>
+          <figcaption>States where more adults fall short on fruit also tend to have higher overweight/obesity.
+            The dashed line is the overall trend across the eight states.</figcaption>
         </figure>
         <figure class="card">
           <div id="barchart_scorecard" class="vis"></div>
           <figcaption>Nationally, inadequate vegetable intake and insufficient activity dwarf every other risk.</figcaption>
         </figure>
       </div>
-      </figure>
+
     </section>
 
     <!-- ============ SECTION 4 : AUSPLAY ============ -->
-    <section>
+    <section id="part-play">
       <span class="section-kicker">Part 4</span>
       <h2>How Australia plays</h2>
       <p class="lead">Only a quarter of adults meet the full activity-and-strength guideline — yet 86% move in some
         way. The national AusPlay survey shows <em>what</em> Australians do, <em>how often</em>, and <em>where</em>
         they are most active.</p>
 
-      <figure class="card card-wide">
-        <div id="symbol_sport" class="vis"></div>
-        <figcaption>Circle size scales with the number of adults who did any activity; colour shows how many keep it
-          up three or more times a week. The ACT is the country's most active jurisdiction; New South Wales the least.</figcaption>
-      </figure>
-
       <div class="grid grid-2">
+        <figure class="card">
+          <div id="symbol_sport" class="vis"></div>
+          <figcaption>Triangle size scales with the number of adults who did any activity; colour shows how many keep it
+            up three or more times a week. The ACT is the country's most active jurisdiction; New South Wales the least.</figcaption>
+        </figure>
         <figure class="card">
           <div id="lollipop_top_sports" class="vis"></div>
           <figcaption>Walking and the gym dominate — half of all adults walk for recreation. Pilates now outranks
             soccer, a sign of how Australians are redefining "sport".</figcaption>
         </figure>
+      </div>
+
+      <div class="grid grid-2">
         <figure class="card">
           <div id="ausplay_participation" class="vis"></div>
           <figcaption>Most adults are active at least weekly, but the share falls sharply at the higher
             frequencies health experts recommend.</figcaption>
         </figure>
+        <figure class="card callout-card">
+          <h3>Where we move</h3>
+          <ul class="setting-list">
+            <li><span class="big">62%</span> in public spaces — parks, streets and beaches</li>
+            <li><span class="big">31%</span> at a gym, fitness or leisure centre</li>
+            <li><span class="big">30%</span> at home</li>
+          </ul>
+          <p class="note">The fastest-growing activities include pickleball, padel and pilates.</p>
+        </figure>
       </div>
 
-      <figure class="card callout-card">
-        <h3>Where we move</h3>
-        <ul class="setting-list">
-          <li><span class="big">62%</span> in public spaces — parks, streets and beaches</li>
-          <li><span class="big">31%</span> at a gym, fitness or leisure centre</li>
-          <li><span class="big">30%</span> at home</li>
-        </ul>
-        <p class="note">The fastest-growing activities include pickleball, padel and pilates.</p>
-      </figure>
     </section>
 
     <!-- ============ FOOTER / METADATA ============ -->
-    <footer class="meta">
+    <footer class="meta" id="part-about">
       <h2>About this visualisation</h2>
       <div class="grid grid-2">
         <div>
-          <h3>Data sources</h3>
-          <ul>
-            <li><strong>Australian Bureau of Statistics (ABS)</strong>, <em>National Health Survey, 2022</em>
-              — smoking, diet, alcohol, overweight/obesity and physical activity (national, by state &amp; by sex).</li>
-            <li><strong>Australian Institute of Health and Welfare (AIHW)</strong>, <em>Physical activity data tables, 2022</em>
-              — activity by socioeconomic area.</li>
-            <li><strong>Australian Sports Commission</strong>, <em>AusPlay, 2025</em> — sport participation by
-              activity and by state (the sport map, top-activities and frequency charts).</li>
-            <li><strong>Australian Bureau of Statistics (ABS)</strong>, <em>National, state and territory population</em> (31 Mar 2026) — supporting population figures.</li>
+          <h3>Data Sources</h3>
+          <ul class="apa">
+            <li>Australian Bureau of Statistics. (2023). <em>National Health Survey, 2022</em>.
+              <a href="https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/2022" target="_blank" rel="noopener">https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/2022</a></li>
+            <li>Australian Bureau of Statistics. (2026). <em>National, state and territory population, March 2026</em>.
+              <a href="https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release" target="_blank" rel="noopener">https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release</a></li>
+            <li>Australian Institute of Health and Welfare. (2024). <em>Physical activity</em> [Data tables].
+              <a href="https://www.aihw.gov.au/reports/physical-activity" target="_blank" rel="noopener">https://www.aihw.gov.au/reports/physical-activity</a></li>
+            <li>Australian Sports Commission. (2026). <em>AusPlay: National data tables, January&ndash;December 2025</em>.
+              <a href="https://www.ausport.gov.au/clearinghouse/research/ausplay/results" target="_blank" rel="noopener">https://www.ausport.gov.au/clearinghouse/research/ausplay/results</a></li>
+            <li>Natural Earth. (n.d.). <em>Admin 0 &ndash; Countries</em> (1:110m cultural vectors) [Data set].
+              Retrieved October&nbsp;17, 2026, from
+              <a href="https://www.naturalearthdata.com/downloads/110m-cultural-vectors/" target="_blank" rel="noopener">https://www.naturalearthdata.com/downloads/110m-cultural-vectors/</a></li>
           </ul>
         </div>
         <div>
@@ -203,12 +226,20 @@
           <ul>
             <li>All health figures are percentages of adults for 2022 unless stated. "Exceeded the alcohol guideline"
               uses the 2020 Australian Adult Alcohol Guideline.</li>
+            <li>Australia was cropped out of the Natural Earth 1:110m Admin 0 &ndash; Countries layer using mapshaper, and the state and territory boundaries were added to build the base map used by every map on this page.</li>
+            <li>The cartogram is schematic: each state keeps its shape but is scaled by its score, so sizes show the measure, not land area. Dot positions within a state are illustrative, not actual addresses.</li>
+            <li>Built with Vega-Lite. Each chart's JSON specification lives in the <code>/js</code> folder of the
+              source repository and is human-readable.</li>
           </ul>
         </div>
       </div>
       <p class="byline">Author: <strong>Jannie Tham Jawin</strong> · FIT3179 Data Visualisation 2, Monash University ·
         Last updated October 2026.</p>
     </footer>
+
+    <div class="to-top-wrap">
+      <a class="to-top" href="#top" aria-label="Back to top of page">&uarr;&nbsp; Back to top</a>
+    </div>
 
   </main>
 
