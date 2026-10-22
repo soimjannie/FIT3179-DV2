@@ -64,6 +64,21 @@
           "size": 60,
           "color": "#e75190"
         }
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "title": "Daily smoking rate (%)",
+            "format": ".1f"
+          }
+        ]
       }
     },
     {
