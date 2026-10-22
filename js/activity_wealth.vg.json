@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Activity rises with wealth",
+    "subtitle": "Adults meeting the activity + strength guidelines (%), by socioeconomic area, 2022"
+  },
+  "width": 620,
+  "height": 400,
+  "data": {
+    "url": "data/activity_by_ses.csv"
+  },
+  "transform": [
+    { "joinaggregate": [{ "op": "mean", "field": "met_pct", "as": "avg" }] },
+    { "calculate": "'Avg ' + format(datum.avg, '.1f') + '%'", "as": "avgLabel" }
+  ],
+  "encoding": {
+    "y": {
+      "field": "area",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Highest", "4", "3", "2", "Lowest"],
+      "axis": {
+        "labelFontWeight": "bold",
+        "labelFontSize": 12,
+        "labelPadding": 8
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 26,
+        "color": "#eef1f4",
+        "cornerRadius": 13
+      },
+      "encoding": {
+        "x": { "datum": 30 }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "size": 26,
+        "cornerRadius": 13,
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x": {
+          "field": "met_pct",
+          "type": "quantitative",
+          "title": "% meeting the guidelines",
+          "scale": { "domain": [0, 30] },
+          "axis": {
+            "grid": true,
+            "gridColor": "#f2f4f7",
+            "gridDash": [3, 3],
+            "tickCount": 7,
+            "titlePadding": 12
+          }
+        },
+        "color": {
+          "field": "met_pct",
+          "type": "quantitative",
+          "scale": { "scheme": "yelloworangered", "reverse": true },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "area", "title": "Socioeconomic area" },
+          { "field": "met_pct", "title": "% meeting guidelines" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "stroke": "#1f2d3d",
+        "strokeWidth": 2,
+        "opacity": 0.35,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "x": { "field": "met_pct", "type": "quantitative" },
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": ["Highest", "4", "3", "2", "Lowest"]
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#3d4d5c",
+        "strokeDash": [4, 3],
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "x": { "field": "avg", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -24,
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#3d4d5c"
+      },
+      "encoding": {
+        "x": { "field": "avg", "type": "quantitative" },
+        "y": { "datum": "Highest" },
+        "text": { "field": "avgLabel" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 9,
+        "fontWeight": "bold",
+        "fontSize": 12,
+        "color": "#1f2d3d"
+      }
+    }
+  ]
+}
